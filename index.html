@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumebuilder</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <!-- html2canvas (required for jsPDF html rendering) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+     <header class="site-header">
+    <div class="container">
+      <h1>📄 Resume Builder</h1>
+      <nav>
+  
+      </nav>
+    </div>
+  </header>
+ 
+
+    <main>
+ <div class="app">
+    <div class="panel controls">
+      <h2>Resume Builder</h2>
+      <div class="muted">Fill the fields — preview updates live. Use <strong>Download PDF</strong> to export (Print to PDF).</div>
+
+      <div class="section">
+        <div class="row">
+          <div class="small">
+           <label>Full name</label>
+        <input id="name" type="text" placeholder="Sourabh" />
+          </div>
+         <div class="small">
+         <label>Job title</label>
+        <input id="title" type="text" placeholder="django Developer" />
+         </div>
+        
+        </div>
+       
+        <div class="row">
+          <div class="small">
+            <label>Email</label>
+            <input id="email" type="email" placeholder="sourabh@domain.com" />
+          </div>
+          <div class="small">
+            <label>Phone</label>
+            <input id="phone" type="tel" placeholder="+91 98765 43210" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="small">
+          <label>Location</label>
+        <input id="location" type="text" placeholder="City, Country" />
+          </div>
+          <div class="small">
+            <label>Linkedin </label>
+            <input id="Linkedin" type="text" placeholder="Linkedin url" />
+          </div>
+        </div>
+        
+        
+        <label>Profile picture (optional)</label>
+        <input id="photo" type="file" accept="image/*" />
+      </div>
+
+      <div class="section">
+        <label>Summary / Objective</label>
+        <textarea id="summary" placeholder="Short profile summary..."></textarea>
+      </div>
+
+      <div id="educationArea" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Education</strong>
+          <div>
+            <button id="addEdu" class="btn small add-btn">+ Add education</button>
+          </div>
+          
+        </div>
+        <div id="educations"></div>
+      </div> 
+      
+      <div id="experiencesArea" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Experience</strong>
+          <div>
+           <button id="addExp" class="btn small add-btn">+ Add experience</button>
+          </div>
+          
+        </div>
+        <div id="experiences"></div>
+      </div>
+
+     
+
+        <!-- NEW: Projects (behaves like Education/Experience) -->
+        <div id="projectsArea" class="section">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Projects</strong>
+            <div>
+              <button id="addProject" class="btn small add-btn">+ Add project</button>
+            </div>
+          </div>
+          <div id="projectsList"></div>
+        </div>
+         <div id="skillsArea" class="section">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Skills</strong>
+            <div>
+              <button id="addSkill" class="btn small add-btn">+ Add skill</button>
+            </div>
+          </div>
+          <div id="skillsList"></div>
+        </div>
+     
+         <!-- Interests -->
+      <div id="interestsArea" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Interests</strong>
+          <div>
+            <button id="addInterest" class="btn small add-btn">+ Add interest</button>
+          </div>
+        </div>
+        <div id="interestsList"></div>
+      </div>
+
+      <div id="certificatesArea" class="section">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>Certificates</strong>
+    <div>
+      <button id="addCert" class="btn small add-btn">+ Add certificate</button>
+    </div>
+  </div>
+  <div id="certifications"></div>
+</div>
+
+     
+
+      <!-- Languages -->
+      <div id="languagesArea" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Languages</strong>
+          <div>
+            <button id="addLanguage" class="btn small add-btn">+ Add language</button>
+          </div>
+        </div>
+        <div id="languagesList"></div>
+      </div>
+
+
+      <div class="actions">
+        <button id="resetBtn" class="btn" style="background:#ff6b6b">Reset</button>
+        <button id="printBtn" class="btn">Print PDF</button>
+        <button id="downloadPdf" class="btn">Download PDF</button>
+       
+
+      </div>
+
+      <div style="margin-top:12px;font-size:13px;color:var(--muted)">Tip: add multiple experiences/education items. Use browser Print -> Save as PDF to export.</div>
+    </div>
+ <h2>Preview</h2>
+    <div class="panel preview-wrap" >
+     
+      <div id="preview" class="resume" role="document" >
+        <div class="header">
+          <div class="avatar" id="avatar">Ss</div>
+          <div>
+            <h1 class="name" id="p_name">Sourabh</h1>
+            <div class="meta" id="p_title">django Developer</div>
+            <div class="meta" id="p_contact">sourabh@domain.com • +91 98765 43210 • City, Country</div>
+            <div class="meta" id="l_contact">linkedin url</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-title">Summary</div>
+          <div id="p_summary" class="muted">Short profile summary...</div>
+
+           <div class="section-title">Education</div>
+          <div id="p_education"></div>
+
+          <div class="section-title">Experience</div>
+          <div id="p_experience"></div>
+
+         
+
+          <div  style="margin-top:12px;gap:36px">
+           
+            <div >
+              <div class="section-title">Projects</div>
+              <div id="p_projects"></div>
+            </div>
+             <div >
+              <div class="section-title">Skills</div>
+              <div id="p_skills"></div>
+            </div>
+
+          </div>
+          <div class="section-title">Interests</div>
+<div id="p_interests"></div>
+          <div class="section-title">Certificates</div>
+<div id="p_certificates"></div>
+
+
+
+<div class="section-title">Languages</div>
+<div id="p_languages"></div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="expTpl">
+    <div class="expItem section">
+      <label>Company / Role</label>
+      <input class="cmp" type="text" placeholder="Company • Role" />
+      <div class="row">
+        <input class="from small" type="text" placeholder="From (e.g. 2021)" />
+        <input class="to small" type="text" placeholder="To (e.g. Present)" />
+      </div>
+      <label>Details</label>
+      <textarea class="details" placeholder="What you did — achievements, tech used"></textarea>
+      <div style="text-align:right;margin-top:6px"><button class="removeExp btn" style="background:#ef4444">Remove</button></div>
+    </div>
+  </template>
+
+  <template id="eduTpl">
+    <div class="eduItem section">
+      <label>School / Degree</label>
+      <input class="school" type="text" placeholder="B.Sc Computer Science — XYZ University" />
+      <div class="row">
+        <input class="eyear small" type="text" placeholder="Year" />
+        <input class="egrade small" type="text" placeholder="Grade / GPA (optional)" />
+      </div>
+      <div style="text-align:right;margin-top:6px"><button class="removeEdu btn" style="background:#ef4444">Remove</button></div>
+    </div>
+  </template>
+
+  <template id="skillTpl">
+      <div class="skillItem section">
+        <label>Skill</label>
+        <input class="skillName" type="text" placeholder="e.g. Python" />
+        <div style="text-align:right;margin-top:6px">
+          <button class="removeSkill btn" type="button"  style="background:#ef4444">Remove</button>
+        </div>
+      </div>
+    </template>
+
+    <!-- Project template -->
+    <template id="projTpl">
+      <div class="projItem section">
+        <label>Project Title</label>
+        <input class="projName" type="text" placeholder="e.g. Portfolio Website" />
+        <label>Short description</label>
+        <textarea class="projDesc" placeholder="What it does — tech used"></textarea>
+        <label>Link (optional)</label>
+        <input class="projLink" type="url" placeholder="https://example.com" />
+        <div style="text-align:right;margin-top:6px">
+          <button class="removeProj btn"   style="background:#ef4444" type="button">Remove</button>
+        </div>
+      </div>
+    </template>
+
+  <template id="certTpl">
+  <div class="certItem section">
+    <label>Certificate Name</label>
+    <input class="certName" type="text" placeholder="AWS Certified Developer" />
+    <input class="certYear small" type="text" placeholder="Year" />
+    <div style="text-align:right;margin-top:6px">
+      <button class="removeCert btn" style="background:#ef4444">Remove</button>
+    </div>
+  </div>
+</template>
+  <!-- Interest template -->
+  <template id="interestTpl">
+    <div class="interestItem section">
+      <label>Interest</label>
+      <input class="interestName" type="text" placeholder="e.g. Reading, Hiking" />
+      <div style="text-align:right;margin-top:6px">
+        <button class="removeInterest btn" style="background:#ef4444" type="button">Remove</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Language template -->
+  <template id="langTpl">
+    <div class="langItem section">
+      <label>Language</label>
+      <input class="langName" type="text" placeholder="e.g. English" />
+      <label>Proficiency (optional)</label>
+      <input class="langLevel" type="text" placeholder="e.g. Fluent, Intermediate" />
+      <div style="text-align:right;margin-top:6px">
+        <button class="removeLang btn" style="background:#ef4444" type="button">Remove</button>
+      </div>
+    </div>
+  </template>
+
+
+
+
+    </main>
+
+   
+<footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Resume Builder | Built with ❤️ using HTML, CSS & JavaScript</p>
+    </div>
+  </footer>
+    <script src="index.js"></script>
+</body>
+</html>
