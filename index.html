@@ -25,11 +25,23 @@
   
       </nav>
     </div>
-  </header>
+     </header>
  
 
-    <main>
+  <main>
+<div class="panel controls" style="background-color: #dadada; text-align: center;">
+  <div style="margin-bottom: 40px; "> 
+          <!-- Main Hero Section -->
+<h1>Build ATS-Friendly Resumes in Minutes</h1>
+<p>Create a professional resume that stands out to recruiters and passes ATS with ease.</p>
+
+<p>Whether you’re a fresher or an experienced professional, create a resume that gets you interview calls.</p>
+
+        
+      </div>
+</div>
  <div class="app">
+  
     <div class="panel controls">
       <h2>Resume Builder</h2>
       <div class="muted">Fill the fields — preview updates live. Use <strong>Download PDF</strong> to export (Print to PDF).</div>
@@ -69,9 +81,6 @@
           </div>
         </div>
         
-        
-        <label>Profile picture (optional)</label>
-        <input id="photo" type="file" accept="image/*" />
       </div>
 
       <div class="section">
@@ -158,10 +167,9 @@
       </div>
 
 
-      <div class="actions">
-        <button id="resetBtn" class="btn" style="background:#ff6b6b">Reset</button>
-        <button id="printBtn" class="btn">Print PDF</button>
-        <button id="downloadPdf" class="btn">Download PDF</button>
+      <div class="actions" >
+        <button id="resetBtn" class="btn" style="background:#fa2525">Reset</button>
+        <button id="printBtn" class="btn" style="background:#000000" >Download PDF</button>
        
 
       </div>
@@ -171,52 +179,52 @@
  <h2>Preview</h2>
     <div class="panel preview-wrap" >
      
-      <div id="preview" class="resume" role="document" >
-        <div class="header">
-          <div class="avatar" id="avatar">Ss</div>
-          <div>
+      <div id="preview" class="resume" role="document"  >
+       
             <h1 class="name" id="p_name">Sourabh</h1>
             <div class="meta" id="p_title">django Developer</div>
             <div class="meta" id="p_contact">sourabh@domain.com • +91 98765 43210 • City, Country</div>
             <div class="meta" id="l_contact">linkedin url</div>
-          </div>
-        </div>
-        <div>
-          <div class="section-title">Summary</div>
+          
+        
+
+          <div class="section-title"> Summary <div class="print-line"></div> </div>
           <div id="p_summary" class="muted">Short profile summary...</div>
+          
 
-           <div class="section-title">Education</div>
-          <div id="p_education"></div>
+          <div class="section-title"> Education <div class="print-line"></div> </div> 
+          <div id="p_education"> </div>
+          
 
-          <div class="section-title">Experience</div>
-          <div id="p_experience"></div>
-
-         
-
-          <div  style="margin-top:12px;gap:36px">
-           
+          <div class="section-title">Experience <div class="print-line"></div> </div> 
+          <div id="p_experience"> </div>
+          
             <div >
-              <div class="section-title">Projects</div>
+              <div class="section-title">Projects <div class="print-line"></div> </div>
               <div id="p_projects"></div>
             </div>
+            
              <div >
-              <div class="section-title">Skills</div>
+              <div class="section-title">Skills <div class="print-line"></div> </div>
               <div id="p_skills"></div>
             </div>
+            
 
-          </div>
-          <div class="section-title">Interests</div>
-<div id="p_interests"></div>
-          <div class="section-title">Certificates</div>
-<div id="p_certificates"></div>
+         
+          <div class="section-title">Interests <div class="print-line"></div> </div>
+          <div id="p_interests"></div>
+          
+          <div class="section-title">Certificates  <div class="print-line"></div> </div>
+          <div id="p_certificates"></div>
+          
 
 
 
-<div class="section-title">Languages</div>
+<div class="section-title">Languages <div class="print-line"></div> </div>
 <div id="p_languages"></div>
 
 
-        </div>
+      
       </div>
     </div>
   </div>
@@ -316,7 +324,7 @@
     <div class="container">
       <p>&copy; 2025 Resume Builder | Built with ❤️ using HTML, CSS & JavaScript</p>
     </div>
-  </footer>
+</footer>
     <script src="index.js"></script>
 </body>
 </html>
